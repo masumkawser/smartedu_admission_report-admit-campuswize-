@@ -1,0 +1,120 @@
+
+    <odoo>
+        <data>
+            <report id="report_se_program_campus_wise_list" model="program.campus.wise.list" report_type="qweb-html" string="Program And Campus Wise Student Admitted List" print_report_name="'Program And Campus Wise Student List Report of %s' %(object.course_id)" name="smartedu_admission.report_se_program_campus_wise_list_template" file="smartedu_admission.report_se_program_campus_wise_list_template" paperformat="smartedu_admission.custom_paperformat_admission_landscape" attachment_use="False"/>
+            <template id="report_se_program_campus_wise_list_template">
+                <t t-call="web.html_container">
+                <t t-call="web.basic_layout">
+                    <t t-if ="not o" t-set="o" t-value="doc"/>
+                            <t t-if="not company">
+                                <t t-if="company_id">
+                                    <t t-set="company" t-value="company_id"/>
+                                </t>
+                                <t t-elif="o and 'company_id' in o and o.company_id.sudo()">
+                                    <t t-set="company" t-value="o.company_id.sudo"/>
+                                </t>
+                                <t t-else="else">
+                                    <t t-set="company" t-value="res_company"/>
+                                </t>
+                            </t> 
+                <div class="page container">
+                    <!--  Report Title  -->
+                                        <div>
+                                            <h3 style= "text-align:center"><span t-if="company.name" 
+                                            t-field="company.name" /></h3>
+                                        </div> 
+                    <!-- <h1 class="text-center" style="color:blue;"> Daffodil International University </h1> -->
+                    <h5 class="text-center"> Program wise campus wise admitted student’s list </h5>
+                        <h5 class="text-center">
+                            Semester:
+                            <span t-esc="semester_id"/>
+                            (
+                            <span t-esc="semester_type"/>
+                            ),
+                            <span t-esc="semester_year" />
+                        </h5>
+                        <h5 class="text-center">
+                            Campus:
+                            <span t-esc="campus_id"/>
+                        </h5>
+                        <t t-if="not program">
+                            <div class="row" style="margin-left: 2px;">
+                                    <div class="col-md-12 text-center">
+                                    <p>There are currently no information in selected date range for your program and campus wise student admitted list report. </p>
+                                    </div>
+                            </div>
+                        </t>
+                        <t t-else="">
+                            <span> Student List: </span>
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>SL</th>
+                                        <th>Student ID</th>
+                                        <th>Student Name</th>
+                                        <th>Program Name</th>
+                                        <th>Shift</th>
+                                        <th>Board Name</th>
+                                        <th>Gender</th>
+                                        <!-- <th>Faculty Name</th> -->
+                                        <th>District</th>
+                                        <!--                                         <th>College/ Institutions Name</th> -->
+                                        <th>Nationality</th>
+                                    </tr>
+                                </thead>
+                                    <tbody>
+                                        <t t-set="i" t-value="1"/>
+                                        <t t-foreach="program" t-as="app">
+                                        <!-- <t t-if="app['student_id']"> -->
+                                        <tr>
+                                                <td>
+                                                    <span t-esc="i"/>
+                                                    <t t-set="i" t-value="i+1"/>
+                                                </td>
+                                                <td>
+                                                    <span t-esc="app['student_id']"/>
+                                                </td>
+                                                <td>
+                                                    <span t-esc="app['student_name']"/>
+                                                </td>
+                                                <td>
+                                                    <span t-esc="app['course_name']"/>
+                                                </td>
+                                                <td>
+                                                    <span t-esc="app['shift']"/>
+                                                </td>
+                                                <td>
+                                                    <span t-esc="app['hsc_board_name']"/>
+                                                    <span t-esc="app['o_level_board_name']"/>
+                                                </td>
+                                                <td>
+                                                    <t t-if="app['gender'] == 'm'">Male</t>
+                                                    <t t-if="app['gender'] == 'f'">Female</t>
+                                                    <t t-if="app['gender'] == 'o'">other</t>
+                                                </td>
+                                                <!-- <td>
+                                                    <span t-esc="app['faculty_name']"/>
+                                                </td> -->
+                                                <td>
+                                                    <span t-esc="app['district']"/>
+                                                </td>
+                                            <!--                                             <td> -->
+                                            <!--                                                 <span class="span" t-esc="app['college_name']"/> -->
+                                            <!--                                                 <span class="span" t-esc="app['o_level_college_name']"/> -->
+                                            <!--                                             </td> -->
+                                                <td>
+                                                    <span t-esc="app['nationality']"/>
+                                                </td>
+                                        </tr>
+                                        </t>
+                                       
+                                    </tbody>
+                            </table>
+                        </t>
+                    </div>
+                </t>
+              </t>
+            </template>
+      </data>
+
+    </odoo>

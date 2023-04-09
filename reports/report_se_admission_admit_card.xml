@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+        <report id="report_admission_student" model="se.application" report_type="qweb-pdf" string="Admit Card" print_report_name="'Admit Card %s' %(object.application_serial_number)" name="smartedu_admission.report_student" file="smartedu_admission.report_student" attachment_use="False"/>
+
+
+        <template id="report_admission_admitcards">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="web.basic_layout">
+                        <t t-if ="not o" t-set="o" t-value="doc"/>
+                        <t t-if="not company">
+                            <t t-if="company_id">
+                                <t t-set="company" t-value="company_id"/>
+                            </t>
+                            <t t-elif="o and 'company_id' in o and o.company_id.sudo()">
+                                <t t-set="company" t-value="o.company_id.sudo"/>
+                            </t>
+                            <t t-else="else">
+                                <t t-set="company" t-value="res_company"/>
+                            </t>
+                        </t>         
+                        <div class="page">
+                               
+                          <!-- Dynamic header part of report -->
+
+                            <div class="row" style="border-top: 4px dashed black; border-bottom: 4px dashed black;">
+                                <div class="col-6 ">
+                                    <img class="img-fluid mt-2" style="max-width: 320px;" t-if="company.logo" 
+                                     t-att-src="image_data_uri(company.logo)" t-att-alt="company.name"/>
+                                </div>
+                                <div class="col-6" >
+                                
+                                      <div>
+                                     <h3><span t-if="company.name" 
+                                     t-field="company.name" /></h3>
+                                     </div> 
+                                         <div>
+                                        <h6>
+                                        <span t-if="company.street" 
+                                     t-field="company.street" />
+                                        </h6>
+                                        </div>
+                                          <div>
+                                     <span t-if="company.mobile" 
+                                     t-field="company.mobile" />
+                                        </div>
+                                          <div>
+                                     <span t-if="company.phone" 
+                                     t-field="company.phone" />
+                                        </div>
+                                    <div>
+                                     <span t-if="company.website" 
+                                     t-field="company.website" />
+                                        </div>
+
+                                      
+                                     <div >
+                                     <span t-if="company.email" 
+                                     t-field="company.email" />
+                                     </div>
+                                     
+                                </div>
+                            </div>
+
+                            <!-- Dynamic header part of report End -->
+
+                        <!--  Report Title  -->
+
+
+                        <div class="row" style="margin-top: 20px;">
+                            <div class="col-md-12">
+                                <h4 class="text-center font-weight-bold">
+                                    <u>ADMIT CARD</u>
+                                </h4>
+                            </div>
+                        </div>
+                        <br/>
+                         <!--  Report Title  -->
+
+                        <!--  Report Body  -->
+                        <div class="row">
+                            <div class="col-md-9 col-xs-9 col-sm-9 col-9" style="line-height: 8px">
+                                <table class="table table-borderless x">
+                                    <tbody>
+                                        <tr>
+                                            <td width="30%">Applicant Serial No</td>
+                                            <td>
+:
+                                                <b>
+                                                    <span t-if="o.application_serial_number" t-esc="o.application_serial_number"/>
+                                                </b>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td width="30%">Semester</td>
+                                            <td>
+:
+                                                <b>
+                                                    <span t-if="o.semester_id " t-esc="o.semester_id "/>
+-
+                                                    <span t-if="o.semester_year_string" t-esc="o.semester_year_string"/>
+                                                </b>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td width="30%">Applicant Name</td>
+                                            <td>
+:
+                                                <b>
+                                                    <span t-if="o.first_name" t-esc="o.first_name"/>
+                                                    <span t-if="o.middle_name" t-esc="o.middle_name"/>
+                                                    <span t-if="o.last_name" t-esc="o.last_name"/>
+
+                                                </b>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td width="30%">Contact/Mobile No</td>
+                                            <td>
+:
+                                                <b>
+                                                    <span t-if="o.mobile" t-esc="o.mobile"/>
+                                                </b>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td width="30%">Program</td>
+                                            <td>
+:
+                                                <b>
+                                                    <span t-if="o.program_id" t-esc="o.program_id"/>
+                                                </b>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td width="30%">Admission Test Date</td>
+                                            <td>
+:
+                                                <b>
+                                                    <span>
+                                                        <t t-if="o.admission_test_date">
+                                                            <t t-esc="context_timestamp(o.admission_test_date).strftime('%d %B-%Y')"/>
+                                                        </t>
+                                                    </span>
+                                                </b>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td width="30%">Admission Test Time</td>
+                                            <td>
+:
+                                                <b>
+                                                    <span>
+                                                        <t t-if="o.admission_test_date">
+                                                            <t t-esc="context_timestamp(o.admission_test_date).strftime('%I:%M %p')"/>
+                                                        </t>
+                                                    </span>
+                                                </b>
+                                            </td>
+                                        </tr>
+                                        <!-- <tr>
+                                            <td width="30%">Test Venue</td>
+                                            <td>
+:
+                                                <b>
+                                                    <span t-if="o.admission_test_venue_id" t-esc="o.admission_test_venue_id"/>
+                                                </b>
+                                            </td>
+                                        </tr> -->
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="col-md-3 col-xs-3 col-sm-3 col-3 mb-3 text-right">
+                                <!-- <t t-if="o.stu_image">
+                                    <img class="img-fluid" style="width: 200px; height: 180px;" t-if="o.stu_image" t-att-src="image_data_uri(o.stu_image)" t-att-alt="o.stu_image"/>
+                                </t> -->
+                                <br class="m-0 p-0"/>
+                                <t t-if="o.signature">
+                                    <img class="img-fluid mt-3" style="width: 200px; height: 60px;" t-if="o.signature" t-att-src="image_data_uri(o.signature)" t-att-alt="o.signature"/>
+                                </t>
+                            </div>
+                        </div>
+                        <hr class="bg-dark float-right mt-4 mb-0" style="width: 200px; height: 1px;"/>
+                        <br style="display: block; content: '';margin-top: 2px;"/>
+                        <p class="text-right my-0 mr-4">Applicant Signature</p>
+                        <h5 class="mt-5 font-weight-bold" style="border-top: 4px dashed black;"/>
+
+
+                        <!-- Instruction to the Applicant -->
+
+
+                        <h5 class="text-center font-weight-bold mt-2">
+                            <u>Instruction to the Applicant</u>
+                        </h5>
+                        <div class="container applicant-instruction mt-1" style="font-size: 14px;">
+                            <span>01. Candidates must bring the Admit Card and show it to the invigilator(s) on duty. </span>
+                            <br/>
+                            <span>02. Bringing Mobile Phone or any electronic device including electronic watch is STRICTLY PROHIBITED. </span>
+                            <br/>
+                            <span>03. Please bring only black ballpoint pens. Use of pencil is not allowed.</span>
+                            <br/>
+                            <span>04. Candidates should reach the examination hall 30 minutes before the commencement of the examination. </span>
+                            <br/>
+                            <span>05. Photo contained on this admit card will be verified with the original application form submitted. </span>
+                            <br/>
+                            <span>06. Authority reserves all rights to take any kind of punitive measures against any candidate who adopts unfair means or misbehaves in the examination hall. </span>
+                            <br/>
+                            <span>07. This admit card will be considered as admit card for written and viva-voce examination. </span>
+                            <br/>
+                        </div>
+
+                          <!-- Instruction to the Applicant -->
+
+                                    <!-- Instruction After Selection -->
+                        <h5 class="text-center font-weight-bold mt-2">
+                            <u>Instruction After Selection</u>
+                        </h5>
+                        <div class="row container">
+                        
+                                        <div class="mt-2 col-xs-12 col-md-12 col-lg-12 col-sm-12 col-12" style="font-size: 14px; ">
+                                            <span>1. If you are selected in admission test, you are advised to bring all main copies of your Transcripts, Certificates / Testimonials. </span>
+                                            <br/>
+                                            <span>2. Five (05) copies of PP size recent formal photographs.</span>
+                                            <br/>
+                                            <span>3. Photocopies of your Birth Certificate/ NID/ Passport.</span>
+                                        </div>
+                        </div>
+                                    <div class="text-right" style="line-height: 0px;">
+                                                <!-- <t t-if="o.admit_card_authorize_signature"> -->
+                                                <!-- <img class="img-fluid mr-4 mb-2" style="width: 200px; height: 60px; margin: 0 auto;" t-if="data.admit_card_authorize_signature" t-att-src="image_data_uri(data.admit_card_authorize_signature)" t-att-alt="data.admit_card_authorize_signature"/> -->
+                                                <!-- </t> -->
+                                                
+                                            <hr class="bg-dark float-right mt-4 mb-0" style="width: 200px; height: 1px;"/>
+                                            <br style="display: block; content: '';margin-top: 2px;"/>
+                                            <p class="text-right my-0 mr-4"> Signature of The Authorised Person</p>
+                                    </div>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+
+        <template id="report_student">
+            <t t-call="web.html_container">
+                
+                <!-- module_name.report template  -->
+                <t t-call="smartedu_admission.report_admission_admitcards">  
+
+                </t>
+                <!-- </t> -->
+            </t>
+        </template>
+    </data>
+
+</odoo>
