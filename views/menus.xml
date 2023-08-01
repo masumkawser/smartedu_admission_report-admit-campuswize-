@@ -39,7 +39,7 @@
         <menuitem id="menu_admitted_list" 
                 name="Program And Campus Wise Admitted Student List" 
                 parent="se_admission_root" 
-                action="smartedu_admission.program_and_campus_wise_student_list_form_act"/>
+                action="program_and_campus_wise_student_list_form_act"/>
     </data>
 
 </odoo>

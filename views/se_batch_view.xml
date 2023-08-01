@@ -11,15 +11,15 @@
                 <tree string="Batch">
                     <field name="name"/>
                     <field name="code"/>
-                    <field name="batch_no"/>
+                    <field name="number"/>
                     <field name="start_date"/>
                     <field name="end_date"/>
                     <field name="semester_id"/>
                     <field name="semester_year"/>
-                    <field name="program"/>
-                    <field name="curriculum"/>
-                    <field name="syllabus"/>
-                    <field name="payment_scheme"/>
+                    <field name="program_id"/>
+                    <field name="curriculum_id"/>
+                    <field name="syllabus_id"/>
+                    <field name="payment_scheme_id"/>
                 </tree>
             </field>
         </record>
@@ -54,8 +54,8 @@
                             <group>
                                 <field name="name"/>
                                 <field name="start_date"/>
-                                <field name="program"/>
-                                <field name="batch_no"/>
+                                <field name="program_id"/>
+                                <field name="number"/>
                             </group>
                             <group>
                                 <field name="code"/>
@@ -71,19 +71,19 @@
 <!--                            <field name="semester_type_id"/>-->
                         </group>
                         <group>
-                            <field name="year"/>
+                            <field name="semester_year"/>
                         </group>
 
 
                         <h3>Academic Curriculum</h3>
                         <group>
                             <group>
-                                <field name="curriculum"/>
-                                <field name="syllabus"/>
+                                <field name="curriculum_id"/>
+                                <field name="syllabus_id"/>
                             </group>
 
                             <group>
-                                <field name="payment_scheme"/>
+                                <field name="payment_scheme_id"/>
                                 <field name="note"/>
                             </group>
                         </group>

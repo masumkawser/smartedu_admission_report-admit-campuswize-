@@ -1,7 +1,17 @@
 
     <odoo>
         <data>
-            <report id="report_se_program_campus_wise_list" model="program.campus.wise.list" report_type="qweb-html" string="Program And Campus Wise Student Admitted List" print_report_name="'Program And Campus Wise Student List Report of %s' %(object.course_id)" name="smartedu_admission.report_se_program_campus_wise_list_template" file="smartedu_admission.report_se_program_campus_wise_list_template" paperformat="smartedu_admission.custom_paperformat_admission_landscape" attachment_use="False"/>
+
+            <record id="report_se_program_campus_wise_list" model="ir.actions.report">
+                <field name="name">Program And Campus Wise Student Admitted List</field>
+                <field name="model">program.campus.wise.list</field>
+                <field name="report_type">qweb-pdf</field>
+                <field name="report_name">smartedu_admission_report_admit_campuswize.report_se_program_campus_wise_list_template</field>
+                <!-- <field name="paperformat">custom_paperformat_admission_landscape</field> -->
+                <field name="attachment_use">False</field>
+            </record>
+            
+
             <template id="report_se_program_campus_wise_list_template">
                 <t t-call="web.html_container">
                 <t t-call="web.basic_layout">

@@ -2,8 +2,14 @@
 <odoo>
 
     <data>
-        <report id="report_admission_student" model="se.application" report_type="qweb-pdf" string="Admit Card" print_report_name="'Admit Card %s' %(object.application_serial_number)" name="smartedu_admission.report_student" file="smartedu_admission.report_student" attachment_use="False"/>
-
+        <record id="report_admission_student" model="ir.actions.report">
+            <field name="name">Admit Card</field>
+            <field name="model">se.application</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">smartedu_admission_report_admit_campuswize.report_student</field>
+            <field name="attachment_use">False</field>
+        </record>
+        
 
         <template id="report_admission_admitcards">
             <t t-call="web.html_container">
@@ -246,7 +252,7 @@
             <t t-call="web.html_container">
                 
                 <!-- module_name.report template  -->
-                <t t-call="smartedu_admission.report_admission_admitcards">  
+                <t t-call="smartedu_admission_report_admit_campuswize.report_admission_admitcards">  
 
                 </t>
                 <!-- </t> -->

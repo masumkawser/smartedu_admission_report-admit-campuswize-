@@ -40,20 +40,20 @@ class ProgramAndCampusWiseList(models.TransientModel):
         for program in all_program_campus:
             report = {
                 'student_name': program.name,
-                'student_id': program.student_id_text,
+                'student_id': program.student_id_string,
                 'state': program.state,
                 'course_name': program.program_id.name,
                 'shift': program.education_shift_id.name,
                 'hsc_board_name': program.education_board_hsc_id.name,
                 'o_level_board_name': program.education_board_o_level_id.name,
                 'gender': program.gender,
-                # 'faculty_name': program.academic_faculty_id.name,
+                # 'faculty_name': program.faculty_id.name,
                 'district': program.permanent_district_id,
                 'nationality': program.nationality,
             }
             all_report.append(report)
 
-        return self.env.ref('smartedu_admission.report_se_program_campus_wise_list') \
+        return self.env.ref('smartedu_admission_report_admit_campuswize.report_se_program_campus_wise_list') \
             .report_action(self, {'program': all_report,
                                   'semester_id': semester_id.name,
                                   'semester_type': semester_id.semester_type_id.name,

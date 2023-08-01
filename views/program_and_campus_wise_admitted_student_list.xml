@@ -19,17 +19,17 @@
             </field>
         </record>
 
-                    <!-- Action  -->
+                <!-- Action  -->
 
-            <record model="ir.actions.act_window" id="program_and_campus_wise_student_list_form_act">
-                    <field name="name">Program And Campus Wise Student Report</field>
-                    <field name="res_model">program.campus.wise.list</field>
-                    <field name="binding_type">report</field>
-                    <field name="view_mode">form</field>
-                    <field name="view_id" ref="program_and_campus_wise_student_list_form"/>
-                    <!-- <field name="context">{}</field> -->
-                    <field name="target">new</field>
-            </record>
+        <record model="ir.actions.act_window" id="program_and_campus_wise_student_list_form_act">
+                <field name="name">Program And Campus Wise Student Report</field>
+                <field name="res_model">program.campus.wise.list</field>
+                <field name="binding_type">report</field>
+                <field name="view_mode">form</field>
+                <field name="view_id" ref="program_and_campus_wise_student_list_form"/>
+                <!-- <field name="context">{}</field> -->
+                <field name="target">new</field>
+        </record>
 
 
             

@@ -13,6 +13,9 @@
 
     'depends': [
         'smartedu_core',
+        'smartedu_admission',
+        'web',
+        'website',
     ],
 
     # always loaded
